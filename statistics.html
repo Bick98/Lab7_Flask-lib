@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Статистика</title>
+    <link rel="stylesheet" href="/static/CSS/style.css"/>
+    <link rel="stylesheet" href="../static/CSS/table.css">
+    {% import "macros.html" as macros %}
+</head>
+<body>
+<div class=menu>
+    <ul>
+        <li><a href={{ url_for("index") }}>Читатель</a></li>
+        <li><a href={{ url_for('book') }}>Книги</a></li>
+        <li class=active><a href={{ url_for('statistics') }}>Статистика</a></li>
+    </ul>
+</div>
+<div>
+
+    <form action="" method="get">
+            <select class="menu_select" name="select">
+                {% for i in range(len(selected)) %}
+                    {% if choice == selected[i] %}
+                        <option value="{{ selected[i] }}" selected>{{ selected[i] }}</option>
+                    {% else %}
+                        <option value="{{ selected[i] }}">{{ selected[i] }}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+            <input type="submit" value="Выбрать">
+        </form>
+
+
+    </p>
+    {% if f == 1 %}
+        {{ macros.render_borrowers("Должники", df_borrowers,  len) }}
+    {% endif %}
+    {% if f == 2 %}
+        {{ macros.render_pop("Популярный жанр",  df_most_pop,  len) }}
+    {% endif %}
+    </p>
+<form action='' method="get" >
+    <input type="submit" value="Очистить" name="clear">
+</form>
+</div>
+</body>
+</html>
